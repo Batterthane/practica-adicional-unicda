@@ -15,10 +15,10 @@ public static class Identifier
         for (var i = 0; i < identifier.Length; i++)
         {
             var c = identifier[i];
-            
+
             if (LowerCaseGreekLetters.Contains(c))
                 continue;
-            
+
             if (c == ' ')
                 cleaned.Append('_');
             else if (char.IsControl(c))
@@ -27,8 +27,18 @@ public static class Identifier
                 cleaned.Append(char.ToUpper(c));
             else if (char.IsLetter(c))
                 cleaned.Append(c);
-        } 
+        }
 
         return cleaned.ToString();
+    }
+}
+class Program
+{
+    static void Main()
+    {
+        Console.WriteLine(Identifier.Clean("hello world"));
+        Console.WriteLine(Identifier.Clean("my-variable"));
+        Console.WriteLine(Identifier.Clean("a b c"));
+        Console.WriteLine(Identifier.Clean("αβγ"));
     }
 }

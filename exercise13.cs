@@ -38,3 +38,37 @@ static class LogLine
        return  $"{(int)logLevel}:{message}";
     }
 }
+
+class Program
+{
+    static void Main()
+    {
+        string log1 = "[INF]: File opened successfully.";
+        string log2 = "[ERR]: Unable to open file.";
+        string log3 = "[FTL]: System failure.";
+
+        LogLevel level1 = LogLine.ParseLogLevel(log1);
+        LogLevel level2 = LogLine.ParseLogLevel(log2);
+        LogLevel level3 = LogLine.ParseLogLevel(log3);
+
+        Console.WriteLine("Log 1: " + level1);
+        Console.WriteLine("Log 2: " + level2);
+        Console.WriteLine("Log 3: " + level3);
+
+        Console.WriteLine();
+
+        Console.WriteLine(
+            LogLine.OutputForShortLog(level1, "File opened successfully.")
+        );
+
+        Console.WriteLine(
+            LogLine.OutputForShortLog(level2, "Unable to open file.")
+        );
+
+        Console.WriteLine(
+            LogLine.OutputForShortLog(level3, "System failure.")
+        );
+
+        Console.ReadKey();
+    }
+}

@@ -22,3 +22,21 @@ public static class AssemblyLine
     public static int WorkingItemsPerMinute(int speed) =>
         (int) (ProductionRatePerHour(speed) / 60);
 }
+
+class Program
+{
+    static void Main()
+    {
+        int speed = 6;
+
+        Console.WriteLine("Velocidad: " + speed);
+        Console.WriteLine("Producción por hora: " +
+            AssemblyLine.ProductionRatePerHour(speed));
+
+        Console.WriteLine("Porcentaje de éxito: " +
+            AssemblyLine.SuccessRate(speed));
+
+        Console.WriteLine("Autos por minuto: " +
+            AssemblyLine.WorkingItemsPerMinute(speed));
+    }
+}

@@ -2,68 +2,89 @@
 
 //Wizards and Warriors
 
+// Exercism practica 11 Isandel Abreu
+
+// Wizards and Warriors
+
 using System;
 
 abstract class Character
 {
-    private string characterType;
-    
+    private readonly string _characterType;
+
     protected Character(string characterType)
     {
-        this.characterType = characterType;
+        _characterType = characterType;
     }
 
     public abstract int DamagePoints(Character target);
 
-    public virtual bool Vulnerable()
-    {
-        return false;
-    }
+    public virtual bool Vulnerable() => false;
 
-    public override string ToString()
-    {
-        return $"Character is a {characterType}";
-    }
+    public override string ToString() => $"Character is a {_characterType}";
 }
 
 class Warrior : Character
 {
-    public Warrior() : base("Warrior")
+    public Warrior() : base(nameof(Warrior))
     {
     }
 
-    public override int DamagePoints(Character target)
-    {
-       if(target.Vulnerable()){
-            return 10;
-        }
-        return 6; 
-    }
+    public override int DamagePoints(Character target) => target.Vulnerable() ? 10 : 6;
 }
 
 class Wizard : Character
 {
-    private bool spellPrepared = false;
+    private bool _preparedSpell;
 
-    public Wizard() : base("Wizard")
+    public Wizard() : base(nameof(Wizard))
     {
     }
 
-    public override int DamagePoints(Character target)
-    {
-        if(spellPrepared){
-            return 12;
-        }
-        return 3;
-    }
-
-    public override bool Vulnerable()
-    {
-        return !spellPrepared;
-    }
+    public override int DamagePoints(Character target) => _preparedSpell ? 12 : 3;
 
     public void PrepareSpell()
     {
-        spellPrepared = true;
+        _preparedSpell = true;
+    }
+
+    public override bool Vulnerable() => !_preparedSpell;
+}
+
+
+class Program
+{
+    static void Main()
+    {
+        Warrior warrior = new Warrior();
+        Wizard wizard = new Wizard();
+
+        Console.WriteLine(warrior);
+        Console.WriteLine(wizard);
+
+        Console.WriteLine();
+
+        Console.WriteLine("Daño del guerrero al mago: " +
+            warrior.DamagePoints(wizard));
+
+        Console.WriteLine("¿El mago es vulnerable?: " +
+            wizard.Vulnerable());
+
+        wizard.PrepareSpell();
+
+        Console.WriteLine();
+
+        Console.WriteLine("El mago preparó su hechizo.");
+
+        Console.WriteLine("¿El mago es vulnerable?: " +
+            wizard.Vulnerable());
+
+        Console.WriteLine("Daño del mago al guerrero: " +
+            wizard.DamagePoints(warrior));
+
+        Console.WriteLine("Daño del guerrero al mago: " +
+            warrior.DamagePoints(wizard));
+
+        Console.ReadKey();
     }
 }

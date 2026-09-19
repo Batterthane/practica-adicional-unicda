@@ -1,72 +1,82 @@
 // Exercism practica 10 Isandel Abreu
 
-//NEED OFR SPEED
+//NEED FOR SPEED
 
 using System;
 
 class RemoteControlCar
 {
-    // TODO: define the constructor for the 'RemoteControlCar' class
+    private readonly int _speedInMps;
+    private readonly int _batteryDrain;
 
-    private int Speed {get; set;}
-    private int BatteryDrain {get; set;}
-    private int driven = 0;
-    private int battery = 100;
-    
-    public RemoteControlCar(int speed, int batteryDrain)
+    private int _distanceDriven;
+    private int _batteryPercentage = 100;
+
+    public RemoteControlCar(int speedInMps, int batteryDrain)
     {
-        this.Speed = speed;
-        this.BatteryDrain = batteryDrain;
-        int driven = 0;
-        int battery = 100;
-    }
-        
-    public bool BatteryDrained()
-    {
-        bool drained = false;
-        if (battery < BatteryDrain)
-        {
-            drained = true;
-        }
-        return drained;   
+        _speedInMps = speedInMps;
+        _batteryDrain = batteryDrain;
     }
 
-    public int DistanceDriven() => driven;
-    
+    public bool BatteryDrained() => _batteryPercentage < _batteryDrain || _batteryPercentage == 0;
+
+    public int DistanceDriven() => _distanceDriven;
+
     public void Drive()
     {
-        if (battery >= BatteryDrain)
+        if (!BatteryDrained())
         {
-            driven += Speed;
-            battery -= BatteryDrain;
+            _distanceDriven += _speedInMps;
+            _batteryPercentage -= _batteryDrain;
         }
-               
     }
 
-    public static RemoteControlCar Nitro() => new RemoteControlCar(50, 4);       
+    public static RemoteControlCar Nitro() => new RemoteControlCar(50, 4);
 }
 
 class RaceTrack
 {
-    // TODO: define the constructor for the 'RaceTrack' class
-   
-    
-    public int Distance {get; set;}
-        
-    public RaceTrack(int distance)
-    {
-        this.Distance = distance;        
-    }
+    private readonly int _distanceInMetres;
 
-    public bool TryFinishTrack(RemoteControlCar car) 
+    public RaceTrack(int distanceInMetres) =>
+        _distanceInMetres = distanceInMetres;
+
+    public bool TryFinishTrack(RemoteControlCar car)
     {
-        bool empty = car.BatteryDrained();
-        while (empty == false)
+        while (!car.BatteryDrained())
         {
             car.Drive();
-            empty = car.BatteryDrained();
         }
-        return car.DistanceDriven() >= Distance;           
+
+        return car.DistanceDriven() >= _distanceInMetres;
     }
-    
+}
+
+class Program
+{
+    static void Main()
+    {
+        RemoteControlCar car = RemoteControlCar.Nitro();
+
+        Console.WriteLine("Velocidad: 50 m/s");
+        Console.WriteLine("Batería inicial: 100%");
+        Console.WriteLine("Distancia inicial: " + car.DistanceDriven() + " metros");
+
+        car.Drive();
+
+        Console.WriteLine("Después de conducir:");
+        Console.WriteLine("Distancia: " + car.DistanceDriven() + " metros");
+        Console.WriteLine("¿Batería agotada?: " + car.BatteryDrained());
+
+        Console.WriteLine();
+
+        RaceTrack track = new RaceTrack(1000);
+
+        bool finished = track.TryFinishTrack(car);
+
+        Console.WriteLine("Distancia final: " + car.DistanceDriven() + " metros");
+        Console.WriteLine("¿Terminó la pista?: " + finished);
+
+        Console.ReadKey();
+    }
 }

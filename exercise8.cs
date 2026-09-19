@@ -28,3 +28,23 @@ class RemoteControlCar
         Distance += 20;
     }
 }
+
+class Program
+{
+    static void Main()
+    {
+        RemoteControlCar car = RemoteControlCar.Buy();
+
+        Console.WriteLine(car.DistanceDisplay());
+        Console.WriteLine(car.BatteryDisplay());
+
+        car.Drive();
+        car.Drive();
+        car.Drive();
+
+        Console.WriteLine(car.DistanceDisplay());
+        Console.WriteLine(car.BatteryDisplay());
+
+        Console.ReadKey();
+    }
+}

@@ -64,3 +64,67 @@ public static class Languages
         return true;
     }
 }
+
+class Program
+{
+    static void Main()
+    {
+        List<string> languages = Languages.GetExistingLanguages();
+
+        Console.WriteLine("Lenguajes existentes:");
+
+        foreach (string language in languages)
+        {
+            Console.WriteLine(language);
+        }
+
+        Console.WriteLine();
+
+        Console.WriteLine("Cantidad de lenguajes: " +
+            Languages.CountLanguages(languages));
+
+        Console.WriteLine("¿Tiene C#?: " +
+            Languages.HasLanguage(languages, "C#"));
+
+        List<string> added = Languages.AddLanguage(languages, "Python");
+
+        Console.WriteLine("Después de agregar Python:");
+
+        foreach (string language in added)
+        {
+            Console.WriteLine(language);
+        }
+
+        Console.WriteLine();
+
+        List<string> reversed = Languages.ReverseList(languages);
+
+        Console.WriteLine("Lista invertida:");
+
+        foreach (string language in reversed)
+        {
+            Console.WriteLine(language);
+        }
+
+        Console.WriteLine();
+
+        Console.WriteLine("¿Es emocionante?: " +
+            Languages.IsExciting(languages));
+
+        List<string> removed = Languages.RemoveLanguage(languages, "Clojure");
+
+        Console.WriteLine("Después de eliminar Clojure:");
+
+        foreach (string language in removed)
+        {
+            Console.WriteLine(language);
+        }
+
+        Console.WriteLine();
+
+        Console.WriteLine("¿Todos los lenguajes son únicos?: " +
+            Languages.IsUnique(languages));
+
+        Console.ReadKey();
+    }
+}
