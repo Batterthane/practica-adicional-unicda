@@ -2,10 +2,6 @@
 
 //Wizards and Warriors
 
-// Exercism practica 11 Isandel Abreu
-
-// Wizards and Warriors
-
 using System;
 
 abstract class Character
