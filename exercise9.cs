@@ -83,8 +83,13 @@ class Program
         Console.WriteLine("Cantidad de lenguajes: " +
             Languages.CountLanguages(languages));
 
+        Console.WriteLine();
+
         Console.WriteLine("¿Tiene C#?: " +
             Languages.HasLanguage(languages, "C#"));
+
+        Console.WriteLine();
+    
 
         List<string> added = Languages.AddLanguage(languages, "Python");
 
