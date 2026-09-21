@@ -71,6 +71,8 @@ class Program
     {
         List<string> languages = Languages.GetExistingLanguages();
 
+        Console.WriteLine();
+
         Console.WriteLine("Lenguajes existentes:");
 
         foreach (string language in languages)
@@ -117,6 +119,8 @@ class Program
             Languages.IsExciting(languages));
 
         List<string> removed = Languages.RemoveLanguage(languages, "Clojure");
+
+        Console.WriteLine();
 
         Console.WriteLine("Después de eliminar Clojure:");
 
