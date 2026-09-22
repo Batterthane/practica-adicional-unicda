@@ -2,10 +2,6 @@
 
 //Wizards and Warriors 2.0
 
-// Exercism practica 12 Isandel Abreu
-
-// Wizards and Warriors 2.0
-
 using System;
 
 static class GameMaster
