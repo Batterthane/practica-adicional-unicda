@@ -36,3 +36,20 @@ public sealed class WeighingMachine
         }
     }
 }
+
+class Program
+{
+    static void Main()
+    {
+        WeighingMachine machine = new WeighingMachine(2);
+
+        machine.Weight = 75.5;
+
+        Console.WriteLine("Weight: " + machine.Weight);
+        Console.WriteLine("Display weight: " + machine.DisplayWeight);
+
+        machine.TareAdjustment = 3.0;
+
+        Console.WriteLine("Display weight after tare adjustment: " + machine.DisplayWeight);
+    }
+}

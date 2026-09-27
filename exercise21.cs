@@ -74,3 +74,23 @@ public class TelemetryClient
         }
     }
 }
+
+class Program
+{
+    static void Main()
+    {
+        RemoteControlCar car = RemoteControlCar.Buy();
+
+        car.SetSponsors("Sponsor 1", "Sponsor 2");
+
+        car.Drive();
+        car.Drive();
+
+        Console.WriteLine("Sponsor 1: " + car.DisplaySponsor(0));
+        Console.WriteLine("Sponsor 2: " + car.DisplaySponsor(1));
+
+        TelemetryClient telemetry = new TelemetryClient(car);
+
+        Console.WriteLine(telemetry.GetBatteryUsagePerMeter(1));
+    }
+}

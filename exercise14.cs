@@ -64,3 +64,15 @@ namespace Combined
             new(new Blue.Motor(), new Blue.Chassis(), new Blue.Telemetry());
     }
 }
+
+class Program
+{
+    static void Main()
+    {
+        var redCar = Combined.CarBuilder.BuildRed();
+        var blueCar = Combined.CarBuilder.BuildBlue();
+
+        Console.WriteLine("Red car construido correctamente.");
+        Console.WriteLine("Blue car construido correctamente.");
+    }
+}

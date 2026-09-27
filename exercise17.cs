@@ -20,3 +20,14 @@ public static class SimpleCalculator
         };
     }
 }
+
+class Program
+{
+    static void Main()
+    {
+        Console.WriteLine(SimpleCalculator.Calculate(10, 5, "+"));
+        Console.WriteLine(SimpleCalculator.Calculate(10, 5, "*"));
+        Console.WriteLine(SimpleCalculator.Calculate(10, 5, "/"));
+        Console.WriteLine(SimpleCalculator.Calculate(10, 0, "/"));
+    }
+}
